@@ -1,0 +1,288 @@
+# English translations for PROJECT.
+# Copyright (C) 2024 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2024-01-01 12:00+0000\n"
+"PO-Revision-Date: 2024-01-01 12:00+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+msgid "Username_or_email_exists"
+msgstr "Username or email already exists!"
+
+msgid "Registration_successful"
+msgstr "Registration successful! Please login"
+
+msgid "Invalid_credentials"
+msgstr "Username or password is incorrect"
+
+msgid "Book_created"
+msgstr "Book created successfully!"
+
+msgid "Form_validation_failed"
+msgstr "Form validation failed!"
+
+msgid "Role_added"
+msgstr "Role added successfully"
+
+msgid "Role_modified"
+msgstr "Role modified successfully"
+
+msgid "Role_deleted"
+msgstr "Role deleted successfully"
+
+msgid "Role_assigned_to_user"
+msgstr "Role {role_name} assigned to user {username}"
+
+msgid "Role_removed_from_user"
+msgstr "Role {role_name} removed from user {username}"
+
+msgid "Init_successful"
+msgstr "Permissions and roles initialized successfully!"
+
+msgid "Init_failed"
+msgstr "Initialization failed: {error}"
+
+msgid "No_permission"
+msgstr "You don't have permission to access this page"
+
+msgid "At_Least_One_Permission"
+msgstr "You need at least assign one permission."
+
+msgid "Admin_required"
+msgstr "You need admin privileges to access this page"
+
+msgid "Create_Book"
+msgstr "Create Book"
+
+msgid "Edit_Book"
+msgstr "Edit Book"
+
+msgid "Delete_Book"
+msgstr "Delete Book"
+
+msgid "View_Books"
+msgstr "View Books"
+
+msgid "Access_Admin_Panel"
+msgstr "Access Admin Panel"
+
+msgid "Manage_Users"
+msgstr "Manage Users"
+
+msgid "Manage_Roles"
+msgstr "Manage Roles"
+
+msgid "Regular_User"
+msgstr "Regular User"
+
+msgid "Administrator"
+msgstr "Administrator"
+
+# Template strings
+msgid "Login"
+msgstr "Login"
+
+msgid "Register"
+msgstr "Register"
+
+msgid "Close"
+msgstr "Close"
+
+msgid "Username"
+msgstr "Username"
+
+msgid "Password"
+msgstr "Password"
+
+msgid "No_account_register"
+msgstr "No account? Register"
+
+msgid "Have_account_login"
+msgstr "Already have an account? Login"
+
+msgid "Book_List"
+msgstr "Book List"
+
+msgid "Admin_Panel"
+msgstr "Admin Panel"
+
+msgid "Logout"
+msgstr "Logout"
+
+msgid "No_books_available"
+msgstr "No books available"
+
+msgid "Create_Book"
+msgstr "Create Book"
+
+msgid "User_Management"
+msgstr "User Management"
+
+msgid "Role_Management"
+msgstr "Role Management"
+
+msgid "Back_to_Book_List"
+msgstr "Back to Book List"
+
+msgid "User_Statistics"
+msgstr "User Statistics"
+
+msgid "Total_Users"
+msgstr "Total Users"
+
+msgid "Role_Statistics"
+msgstr "Role Statistics"
+
+msgid "Total_Roles"
+msgstr "Total Roles"
+
+msgid "Permission_Statistics"
+msgstr "Permission Statistics"
+
+msgid "Total_Permissions"
+msgstr "Total Permissions"
+
+msgid "User_List"
+msgstr "User List"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Roles"
+msgstr "Roles"
+
+msgid "Actions"
+msgstr "Actions"
+
+msgid "Manage_Roles"
+msgstr "Manage Roles"
+
+msgid "Role_List"
+msgstr "Role List"
+
+msgid "Role_Name"
+msgstr "Role Name"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Permissions"
+msgstr "Permissions"
+
+msgid "User_Count"
+msgstr "User Count"
+
+msgid "Permission_List"
+msgstr "Permission List"
+
+msgid "Permission_Name"
+msgstr "Permission Name"
+
+msgid "Roles_with_Permission"
+msgstr "Roles with this Permission"
+
+msgid "Add_New_Role"
+msgstr "Add New Role"
+
+msgid "Assign_Permissions"
+msgstr "Assign Permissions"
+
+msgid "Add_Role"
+msgstr "Add Role"
+
+msgid "Edit"
+msgstr "Edit"
+
+msgid "Delete"
+msgstr "Delete"
+
+msgid "Confirm_delete_role"
+msgstr "Are you sure you want to delete this role?"
+
+msgid "Back_to_Admin_Panel"
+msgstr "Back to Admin Panel"
+
+msgid "Current_Roles"
+msgstr "Current Roles"
+
+msgid "Add_Role"
+msgstr "Add Role"
+
+msgid "Select_Role"
+msgstr "Select Role"
+
+msgid "Remove_Role"
+msgstr "Remove Role"
+
+msgid "Select_Role_to_Remove"
+msgstr "Select Role to Remove"
+
+msgid "Manage_User_Roles"
+msgstr "Manage User Roles"
+
+msgid "Edit_Role"
+msgstr "Edit Role"
+
+msgid "Back_to_Role_Management"
+msgstr "Back to Role Management"
+
+msgid "Save_Changes"
+msgstr "Save Changes"
+
+# Form validation messages
+msgid "Username_empty"
+msgstr "Username cannot be empty"
+
+msgid "Length_3_25_chars"
+msgstr "Length must be between 3-25 characters"
+
+msgid "Passwords_must_match"
+msgstr "Passwords must match"
+
+msgid "Confirm_Password"
+msgstr "Confirm Password"
+
+msgid "Book_Name"
+msgstr "Book Name"
+
+msgid "Content"
+msgstr "Content"
+
+# Auth middleware messages
+msgid "Please_login_to_access"
+msgstr "Please login to access the requested page"
+
+msgid "Logged_out_successfully"
+msgstr "You have been logged out successfully"
+
+msgid "Please_login_first"
+msgstr "Please login first"
+
+# Test middleware page
+msgid "Test_Middleware"
+msgstr "Test Middleware"
+
+msgid "Auth_Middleware_Test"
+msgstr "Authentication Middleware Test"
+
+msgid "If_you_see_this_logged_in"
+msgstr "If you can see this page, you are logged in!"
+
+msgid "Current_user"
+msgstr "Current user"
+
+msgid "User_roles"
+msgstr "User roles"
+
+msgid "Go_to_Books"
+msgstr "Go to Books" 

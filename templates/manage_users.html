@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="{{ get_locale() }}">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ _('User_Management') }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/auth.css') }}" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mb-4">{{ _('User_Management') }}</h1>
+            
+            <!-- Flash messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class="alert alert-{{ 'danger' if category == 'error' else category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{{ _('Close') }}"></button>
+                  </div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+
+            <!-- Navigation -->
+            <div class="mb-4">
+                <a href="{{ url_for('permission.admin_panel') }}" class="btn btn-secondary">{{ _('Back_to_Admin_Panel') }}</a>
+                <a href="{{ url_for('book.books') }}" class="btn btn-outline-secondary">{{ _('Back_to_Book_List') }}</a>
+            </div>
+
+            <!-- User List -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">{{ _('User_List') }}</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>{{ _('Username') }}</th>
+                                    <th>{{ _('Email') }}</th>
+                                    <th>{{ _('Current_Roles') }}</th>
+                                    <th>{{ _('Actions') }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for user in users %}
+                                <tr>
+                                    <td>{{ user.id }}</td>
+                                    <td>{{ user.username }}</td>
+                                    <td>{{ user.email }}</td>
+                                    <td>
+                                        {% for role in user.roles %}
+                                            <span class="badge bg-primary me-1">{{ role.name }}</span>
+                                        {% endfor %}
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-sm btn-outline-primary" 
+                                                data-bs-toggle="modal" data-bs-target="#roleModal{{ user.id }}">
+                                            {{ _('Manage_Roles') }}
+                                        </button>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Role Management Modal -->
+{% for user in users %}
+<div class="modal fade" id="roleModal{{ user.id }}" tabindex="-1" aria-labelledby="roleModalLabel{{ user.id }}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="roleModalLabel{{ user.id }}">{{ _('Manage_User_Roles') }}: {{ user.username }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ _('Close') }}"></button>
+            </div>
+            <div class="modal-body">
+                <h6>{{ _('Current_Roles') }}:</h6>
+                <div class="mb-3">
+                    {% for role in user.roles %}
+                        <span class="badge bg-primary me-2">{{ role.name }}</span>
+                    {% endfor %}
+                </div>
+                
+                <h6>{{ _('Add_Role') }}:</h6>
+                <form method="POST" action="{{ url_for('permission.manage_user_roles', user_id=user.id) }}">
+                    {{ form.hidden_tag() }}
+                    <div class="mb-3">
+                        <select name="role_id" class="form-select" required>
+                            <option value="">{{ _('Select_Role') }}</option>
+                            {% for role in roles %}
+                                {% if role not in user.roles %}
+                                    <option value="{{ role.id }}">{{ role.name }} - {{ role.description }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <input type="hidden" name="action" value="add">
+                    <button type="submit" class="btn btn-success">{{ _('Add_Role') }}</button>
+                </form>
+                
+                <hr>
+                
+                <h6>{{ _('Remove_Role') }}:</h6>
+                <form method="POST" action="{{ url_for('permission.manage_user_roles', user_id=user.id) }}">
+                    {{ form.hidden_tag() }}
+                    <div class="mb-3">
+                        <select name="role_id" class="form-select" required>
+                            <option value="">{{ _('Select_Role_to_Remove') }}</option>
+                            {% for role in user.roles %}
+                                <option value="{{ role.id }}">{{ role.name }} - {{ role.description }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <input type="hidden" name="action" value="remove">
+                    <button type="submit" class="btn btn-danger">{{ _('Remove_Role') }}</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ _('Close') }}</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

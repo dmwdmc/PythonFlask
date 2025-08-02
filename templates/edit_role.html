@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="{{ get_locale() }}">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ _('Edit Role') }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/auth.css') }}" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+    <h1 class="mb-4">{{ _('Edit_Role') }}</h1>
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ 'danger' if category == 'error' else category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{{ _('Close') }}"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    <div class="mb-4">
+        <a href="{{ url_for('permission.manage_roles') }}" class="btn btn-secondary">{{ _('Back_to_Role_Management') }}</a>
+    </div>
+    <div class="card">
+        <div class="card-header">{{ _('Edit_Role') }}</div>
+        <div class="card-body" >
+            <form method="post" action="{{url_for('permission.edit_role',role_id=role.id)}}">
+                {{ form.hidden_tag() }}
+                <div class="mb-3">
+                    <label class="form-label">{{ _('Role_Name') }}</label>
+                    <input type="text" name="name" class="form-control" value="{{ role.name }}" required>
+                    {% for error in form.name.errors %}
+                        <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">{{ _('Description') }}</label>
+                    <input type="text" name="description" class="form-control" value="{{ role.description }}">
+                    {% for error in form.description.errors %}
+                        <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">{{ _('Assign_Permissions') }}</label><br>
+                    {% for perm in permissions %}
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="permissions" value="{{ perm.id }}" id="perm{{ perm.id }}"
+                                {% if perm in role.permissions %}checked{% endif %}>
+                            <label class="form-check-label" for="perm{{ perm.id }}">{{ perm.name }}</label>
+                        </div>
+                    {% endfor %}
+                </div>
+                     {% for error in form.permissions.errors %}
+                        <div class="alert alert-danger py-1">{{ error }}</div>
+                    {% endfor %}
+                <button type="submit" class="btn btn-primary">{{ _('Save_Changes') }}</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

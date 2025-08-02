@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="{{ get_locale() }}">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ _('Admin_Panel') }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/auth.css') }}" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mb-4">{{ _('Admin_Panel') }}</h1>
+            <!-- Flash messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class="alert alert-{{ 'danger' if category == 'error' else category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{{ _('Close') }}"></button>
+                  </div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+
+            <!-- Navigation -->
+            <div class="mb-4">
+                <a href="{{ url_for('permission.manage_users') }}" class="btn btn-primary">{{ _('User_Management') }}</a>
+                <a href="{{ url_for('permission.manage_roles') }}" class="btn btn-success">{{ _('Role_Management') }}</a>
+                <a href="{{ url_for('book.books') }}" class="btn btn-secondary">{{ _('Back_to_Book_List') }}</a>
+                <a href="{{ url_for('auth.logout') }}" class="btn btn-outline-danger">{{ _('Logout') }}</a>
+            </div>
+
+            <!-- Statistics -->
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ _('User_Statistics') }}</h5>
+                            <p class="card-text">{{ _('Total_Users') }}: {{ users|length }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ _('Role_Statistics') }}</h5>
+                            <p class="card-text">{{ _('Total_Roles') }}: {{ roles|length }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ _('Permission_Statistics') }}</h5>
+                            <p class="card-text">{{ _('Total_Permissions') }}: {{ permissions|length }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User List -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">{{ _('User_List') }}</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>{{ _('Username') }}</th>
+                                    <th>{{ _('Email') }}</th>
+                                    <th>{{ _('Roles') }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for user in users %}
+                                <tr>
+                                    <td>{{ user.id }}</td>
+                                    <td>{{ user.username }}</td>
+                                    <td>{{ user.email }}</td>
+                                    <td>
+                                        {% for role in user.roles %}
+                                            <span class="badge bg-primary me-1">{{ role.name }}</span>
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Role List -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">{{ _('Role_List') }}</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>{{ _('Role_Name') }}</th>
+                                    <th>{{ _('Description') }}</th>
+                                    <th>{{ _('Permissions') }}</th>
+                                    <th>{{ _('User_Count') }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for role in roles %}
+                                <tr>
+                                    <td>{{ role.id }}</td>
+                                    <td>{{ role.name }}</td>
+                                    <td>{{ role.description }}</td>
+                                    <td>
+                                        {% for permission in role.permissions %}
+                                            <span class="badge bg-success me-1">{{ permission.name }}</span>
+                                        {% endfor %}
+                                    </td>
+                                    <td>{{ role.users|length }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Permission List -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">{{ _('Permission_List') }}</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>{{ _('Permission_Name') }}</th>
+                                    <th>{{ _('Description') }}</th>
+                                    <th>{{ _('Roles_with_Permission') }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for permission in permissions %}
+                                <tr>
+                                    <td>{{ permission.id }}</td>
+                                    <td>{{ permission.name }}</td>
+                                    <td>{{ permission.description }}</td>
+                                    <td>
+                                        {% for role in permission.roles %}
+                                            <span class="badge bg-info me-1">{{ role.name }}</span>
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

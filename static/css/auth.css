@@ -1,0 +1,17 @@
+body, html {
+    height: 100%;
+}
+.main-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+}
+.card {
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    border-radius: 1rem;
+}
+.form-label {
+    font-weight: 500;
+} 
